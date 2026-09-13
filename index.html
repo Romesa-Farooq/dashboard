@@ -97,7 +97,85 @@
 
         </section>
 
+        <div class="row g-4 stats-row">
+
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <p class="stat-label">Total Sales</p>
+            <h3 id="totalSales" class="stat-value">$0</h3>
+            <p class="stat-change positive">↑ 12.5% from last month</p>
+        </div>
     </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <p class="stat-label">Total Orders</p>
+            <h3 id="totalOrders" class="stat-value">0</h3>
+            <p class="stat-change positive">↑ 8.2% from last month</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <p class="stat-label">Customers</p>
+            <h3 id="customers" class="stat-value">0</h3>
+            <p class="stat-change positive">↑ 5.4% from last month</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="stat-card">
+            <p class="stat-label">Pending Orders</p>
+            <h3 id="pendingOrders" class="stat-value">0</h3>
+            <p class="stat-change negative">↓ 2.1% from last month</p>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+            <div class="row g-4 chart-row">
+
+    <div class="col-lg-8">
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <h3>Sales Overview</h3>
+                    <p>Monthly sales performance</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-4">
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <div>
+                    <h3>Sales by Category</h3>
+                    <p>Current month</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 </main>
 

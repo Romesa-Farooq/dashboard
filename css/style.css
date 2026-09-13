@@ -134,3 +134,77 @@ body {
     color: #625b72;
     font-size: 14px;
 }
+
+.stats-row {
+    margin-bottom: 28px;
+}
+
+.stat-card {
+    height: 100%;
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #ececf0;
+    border-radius: 14px;
+}
+
+.stat-label {
+    margin: 0 0 10px;
+    color: #7a8289;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.stat-value {
+    margin: 0;
+    color: #25282b;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.stat-change {
+    margin: 8px 0 0;
+    font-size: 12px;
+}
+
+.stat-change.positive {
+    color: #198754;
+}
+
+.stat-change.negative {
+    color: #dc3545;
+}
+
+.chart-row {
+    margin-bottom: 28px;
+}
+
+.chart-card {
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #ececf0;
+    border-radius: 14px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.chart-header p {
+    margin: 4px 0 0;
+    color: #8a9198;
+    font-size: 12px;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+}

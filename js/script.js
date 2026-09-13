@@ -1,12 +1,9 @@
 const dashboardData = {
-
-    sales: 24580,
-
-    orders: 356,
-
-    customers: 1248,
-
-    pendingOrders: 18,
+    statistics: {
+        sales: 24580,
+        orders: 356,
+        customers: 1248
+    },
 
     monthlySales: {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
@@ -19,7 +16,6 @@ const dashboardData = {
     },
 
     recentOrders: [
-
         {
             customer: "Sarah Khan",
             product: "Wireless Mouse",
@@ -27,7 +23,6 @@ const dashboardData = {
             status: "Completed",
             date: "Sep 13, 2026"
         },
-
         {
             customer: "Ahmed Ali",
             product: "Mechanical Keyboard",
@@ -35,7 +30,6 @@ const dashboardData = {
             status: "Pending",
             date: "Sep 12, 2026"
         },
-
         {
             customer: "Hina Malik",
             product: "USB-C Hub",
@@ -43,7 +37,6 @@ const dashboardData = {
             status: "Completed",
             date: "Sep 11, 2026"
         },
-
         {
             customer: "Usman Raza",
             product: "Laptop Stand",
@@ -51,7 +44,6 @@ const dashboardData = {
             status: "Processing",
             date: "Sep 10, 2026"
         },
-
         {
             customer: "Ayesha Noor",
             product: "Wireless Headphones",
@@ -59,7 +51,6 @@ const dashboardData = {
             status: "Completed",
             date: "Sep 9, 2026"
         },
-
         {
             customer: "Bilal Ahmed",
             product: "Gaming Mouse",
@@ -67,7 +58,6 @@ const dashboardData = {
             status: "Pending",
             date: "Sep 8, 2026"
         },
-
         {
             customer: "Maham Tariq",
             product: "Laptop Backpack",
@@ -75,7 +65,6 @@ const dashboardData = {
             status: "Completed",
             date: "Sep 7, 2026"
         },
-
         {
             customer: "Hamza Shah",
             product: "USB-C Cable",
@@ -83,330 +72,307 @@ const dashboardData = {
             status: "Processing",
             date: "Sep 6, 2026"
         }
-
     ]
-
 };
-
 
 $(document).ready(function () {
 
+    $("#totalSales").text("$" + dashboardData.statistics.sales.toLocaleString());
 
-    $("#totalSales").text(
-        "$" + dashboardData.sales.toLocaleString()
-    );
+    $("#totalOrders").text(dashboardData.statistics.orders.toLocaleString());
 
-    $("#totalOrders").text(
-        dashboardData.orders.toLocaleString()
-    );
-
-    $("#customers").text(
-        dashboardData.customers.toLocaleString()
-    );
-
-    $("#pendingOrders").text(
-        dashboardData.pendingOrders.toLocaleString()
-    );
+    $("#customers").text(dashboardData.statistics.customers.toLocaleString());
 
 
-    const salesCanvas = document.getElementById("salesChart");
+    const pendingCount = dashboardData.recentOrders.filter(
+        order => order.status === "Pending"
+    ).length;
 
-    new Chart(salesCanvas, {
+    $("#pendingOrders").text(pendingCount);
 
+
+    const today = new Date();
+
+    const formattedDate = today.toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+    });
+
+    $("#currentDate").text(formattedDate);
+
+
+    const hour = today.getHours();
+
+    let greeting = "Good evening";
+
+    if (hour < 12) {
+        greeting = "Good morning";
+    } else if (hour < 18) {
+        greeting = "Good afternoon";
+    } else {
+        greeting = "Good evening";
+    }
+
+    $("#welcomeMessage").text(greeting + ", Romesa");
+
+
+    new Chart(document.getElementById("salesChart"), {
         type: "line",
-
         data: {
-
             labels: dashboardData.monthlySales.labels,
-
-            datasets: [
-                {
-                    label: "Sales",
-
-                    data: dashboardData.monthlySales.values,
-
-                    borderColor: "#2563eb",
-
-                    backgroundColor: "rgba(37, 99, 235, 0.08)",
-
-                    borderWidth: 2,
-
-                    tension: 0.3,
-
-                    fill: true,
-
-                    pointRadius: 3,
-
-                    pointHoverRadius: 5
-                }
-            ]
-
+            datasets: [{
+                label: "Sales",
+                data: dashboardData.monthlySales.values,
+                borderWidth: 2,
+                tension: 0.4,
+                fill: false
+            }]
         },
-
         options: {
-
             responsive: true,
-
             maintainAspectRatio: false,
-
             plugins: {
-
                 legend: {
                     display: false
                 }
-
             },
-
             scales: {
-
-                x: {
-
-                    grid: {
-                        display: false
-                    },
-
-                    ticks: {
-                        color: "#7a828a"
-                    }
-
-                },
-
-               y: {
-    beginAtZero: true,
-    grid: {
-        color: "#eeeeee"
-    },
-    ticks: {
-        color: "#7a828a",
-        callback: function (value) {
-            return "$" + value.toLocaleString();
-        }
-    }
-}
-
-            }
-
-        }
-
-    });
-
-
-    const categoryCanvas = document.getElementById("categoryChart");
-
-    new Chart(categoryCanvas, {
-
-        type: "bar",
-
-        data: {
-
-            labels: dashboardData.categorySales.labels,
-
-            datasets: [
-                {
-                    label: "Sales",
-
-                    data: dashboardData.categorySales.values,
-
-                    backgroundColor: "#2563eb",
-
-                    borderRadius: 6,
-
-                    barThickness: 28
-                }
-            ]
-
-        },
-
-        options: {
-
-            responsive: true,
-
-            maintainAspectRatio: false,
-
-            plugins: {
-
-                legend: {
-                    display: false
-                }
-
-            },
-
-            scales: {
-
-                x: {
-
-                    grid: {
-                        display: false
-                    },
-
-                    ticks: {
-                        color: "#7a828a"
-                    }
-
-                },
-
                 y: {
-    beginAtZero: true,
-    grid: {
-        color: "#eeeeee"
-    },
-    ticks: {
-        color: "#7a828a",
-        callback: function (value) {
-            return "$" + value.toLocaleString();
-        }
-    }
-}
-
+                    ticks: {
+                        callback: function (value) {
+                            return "$" + value.toLocaleString();
+                        }
+                    }
+                }
             }
-
         }
-
     });
 
-    
+
+    new Chart(document.getElementById("categoryChart"), {
+        type: "bar",
+        data: {
+            labels: dashboardData.categorySales.labels,
+            datasets: [{
+                label: "Sales",
+                data: dashboardData.categorySales.values,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function (value) {
+                            return "$" + value.toLocaleString();
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+
     let showingAllOrders = false;
     let selectedStatus = "All";
     let searchText = "";
 
-function renderOrders() {
-    const ordersTableBody = $("#ordersTableBody");
-    ordersTableBody.empty();
 
-    const search = searchText.trim().toLowerCase();
+    function renderOrders() {
 
-    const filteredOrders = dashboardData.recentOrders.filter(function (order) {
-        const matchesStatus =
-            selectedStatus === "All" ||
-            order.status === selectedStatus;
+        const filteredOrders = dashboardData.recentOrders.filter(function (order) {
 
-        const matchesSearch =
-    search === "" ||
-    order.customer.toLowerCase().includes(search) ||
-    order.product.toLowerCase().includes(search) ||
-    order.status.toLowerCase().includes(search) ||
-    order.amount.toString().includes(search);
+            const matchesStatus =
+                selectedStatus === "All" ||
+                order.status === selectedStatus;
 
-        return matchesStatus && matchesSearch;
-    });
+            const matchesSearch =
+                order.customer.toLowerCase().includes(searchText.toLowerCase()) ||
+                order.product.toLowerCase().includes(searchText.toLowerCase());
 
-    const ordersToDisplay = showingAllOrders
-        ? filteredOrders
-        : filteredOrders.slice(0, 4);
-    
-    const viewAllButton = $("#viewAllOrders");
+            return matchesStatus && matchesSearch;
+        });
 
-if (filteredOrders.length <= 4) {
-    viewAllButton.hide();
-    showingAllOrders = false;
-} else {
-    viewAllButton.show();
-    viewAllButton.text(showingAllOrders ? "Show Less" : "View All");
-}
 
-    if (ordersToDisplay.length === 0) {
-    ordersTableBody.html(`
-        <tr>
-            <td colspan="5" class="no-results">
-                No results found
-            </td>
-        </tr>
-    `);
-} else {
-    ordersToDisplay.forEach(function (order) {
-        const row = `
-            <tr>
-                <td>${order.customer}</td>
-                <td>${order.product}</td>
-                <td>$${order.amount.toLocaleString()}</td>
-                <td>
-                    <span class="status-badge ${order.status.toLowerCase()}">
-                        ${order.status}
-                    </span>
-                </td>
-                <td>${order.date}</td>
-            </tr>
-        `;
+        const ordersToShow = showingAllOrders
+            ? filteredOrders
+            : filteredOrders.slice(0, 4);
 
-        ordersTableBody.append(row);
-    });
-}
 
-    $("#viewAllOrders").text(
-        showingAllOrders ? "Show Less" : "View All"
-    );
-}
+        $("#ordersTableBody").empty();
 
-    $("#viewAllOrders").click(function () {
+
+        if (ordersToShow.length === 0) {
+
+            $("#ordersTableBody").html(`
+                <tr>
+                    <td colspan="5" class="no-results">
+                        No results found
+                    </td>
+                </tr>
+            `);
+
+        } else {
+
+            ordersToShow.forEach(function (order) {
+
+                const statusClass = order.status.toLowerCase();
+
+                $("#ordersTableBody").append(`
+                    <tr>
+                        <td>${order.customer}</td>
+                        <td>${order.product}</td>
+                        <td>$${order.amount}</td>
+                        <td>
+                            <span class="status-badge ${statusClass}">
+                                ${order.status}
+                            </span>
+                        </td>
+                        <td>${order.date}</td>
+                    </tr>
+                `);
+            });
+        }
+
+
+        if (filteredOrders.length > 4) {
+            $("#viewAllOrders").show();
+
+            if (showingAllOrders) {
+                $("#viewAllOrders").text("Show Less");
+            } else {
+                $("#viewAllOrders").text("View All");
+            }
+
+        } else {
+            $("#viewAllOrders").hide();
+        }
+    }
+
+
+    renderOrders();
+
+
+    $("#viewAllOrders").on("click", function () {
+
         showingAllOrders = !showingAllOrders;
+
         renderOrders();
     });
 
-    $(".filter-button").click(function () {
-    selectedStatus = $(this).data("status");
-    showingAllOrders = false;
-    $(".filter-button").removeClass("active");
-    $(this).addClass("active");
-    renderOrders();
-});
+
+    $(".filter-button").on("click", function () {
+
+        $(".filter-button").removeClass("active");
+
+        $(this).addClass("active");
+
+        selectedStatus = $(this).data("status");
+
+        showingAllOrders = false;
+
+        renderOrders();
+    });
+
 
     $("#orderSearch").on("input", function () {
-    searchText = $(this).val();
-    showingAllOrders = false;
-    renderOrders();
-});
 
-$(".sidebar-nav .nav-link").click(function (event) {
-    event.preventDefault();
+        searchText = $(this).val();
 
-    $(".sidebar-nav .nav-link").removeClass("active");
-    $(this).addClass("active");
-});
+        showingAllOrders = false;
 
-$("#profileButton").click(function (event) {
-    event.stopPropagation();
-    $("#profileMenu").toggle();
-});
+        renderOrders();
+    });
 
-$(document).click(function () {
-    $("#profileMenu").hide();
-});
 
-$("#notificationButton").click(function (event) {
-    event.stopPropagation();
+    $(".sidebar-nav .nav-link").on("click", function (e) {
 
-    $("#notificationMenu").toggle();
-    $("#profileMenu").hide();
-});
+        e.preventDefault();
 
-$(document).click(function () {
-    $("#notificationMenu").hide();
-});
+        $(".sidebar-nav .nav-link").removeClass("active");
 
-$("#quickButton").click(function (event) {
-    event.stopPropagation();
-    $("#quickMenu").toggle();
-    $("#notificationMenu").hide();
-    $("#profileMenu").hide();
-});
+        $(this).addClass("active");
+    });
 
-$("#quickOrders").click(function () {
-    $("#quickMenu").hide();
-    $("#viewAllOrders").click();
-});
 
-$("#quickNotifications").click(function () {
-    $("#quickMenu").hide();
-    $("#notificationButton").click();
-});
+    $("#profileButton").on("click", function (e) {
 
-$("#quickSettings").click(function () {
-    $("#quickMenu").hide();
-    alert("Settings selected");
-});
+        e.stopPropagation();
 
-$(document).click(function () {
-    $("#quickMenu").hide();
-});
+        $("#profileMenu").toggle();
+
+        $("#notificationMenu").hide();
+
+        $("#quickMenu").hide();
+    });
+
+
+    $("#notificationButton").on("click", function (e) {
+
+        e.stopPropagation();
+
+        $("#notificationMenu").toggle();
+
+        $("#profileMenu").hide();
+
+        $("#quickMenu").hide();
+    });
+
+
+    $("#quickButton").on("click", function (e) {
+
+        e.stopPropagation();
+
+        $("#quickMenu").toggle();
+
+        $("#profileMenu").hide();
+
+        $("#notificationMenu").hide();
+    });
+
+
+    $("#quickOrders").on("click", function () {
+
+        $("#quickMenu").hide();
+
+        $("html, body").animate({
+            scrollTop: $(".orders-card").offset().top
+        }, 500);
+    });
+
+
+    $("#quickNotifications").on("click", function () {
+
+        $("#quickMenu").hide();
+
+        $("#notificationMenu").toggle();
+    });
+
+
+    $("#quickSettings").on("click", function () {
+
+        $("#quickMenu").hide();
+
+        alert("Settings clicked");
+    });
+
+
+    $(document).on("click", function () {
+
+        $("#profileMenu").hide();
+
+        $("#notificationMenu").hide();
+
+        $("#quickMenu").hide();
+    });
 
 });

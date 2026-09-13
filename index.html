@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Analytics Dashboard</title>
 
     <link
@@ -50,7 +48,6 @@
 
     </aside>
 
-
     <main class="main-content">
 
         <div class="container-fluid">
@@ -58,85 +55,135 @@
             <nav class="topbar">
 
                 <div>
-
                     <h1 class="page-title">
                         Dashboard
                     </h1>
 
-                    <p class="page-date">
-                        Sunday, September 13, 2026
+                    <p class="page-date" id="currentDate">
                     </p>
-
                 </div>
-
 
                 <div class="topbar-actions">
 
                     <div class="notification-wrapper">
-    <button class="icon-button" id="notificationButton">
-        ✉
-    </button>
 
-    <div class="notification-menu" id="notificationMenu">
-        <div class="notification-title">Notifications</div>
+                        <button
+                            id="notificationButton"
+                            class="icon-button">
+                            ✉
+                        </button>
 
-        <div class="notification-item">
-            <strong>New order received</strong>
-            <span>Sarah Khan placed an order</span>
-        </div>
+                        <div
+                            id="notificationMenu"
+                            class="notification-menu">
 
-        <div class="notification-item">
-            <strong>Pending order</strong>
-            <span>2 orders need attention</span>
-        </div>
-    </div>
-</div>
+                            <div class="notification-title">
+                                Notifications
+                            </div>
+
+                            <div class="notification-item">
+                                <strong>New order received</strong>
+                                <span>Wireless Mouse order was placed.</span>
+                            </div>
+
+                            <div class="notification-item">
+                                <strong>Pending order</strong>
+                                <span>You have pending orders to review.</span>
+                            </div>
+
+                            <div class="notification-item">
+                                <strong>Sales update</strong>
+                                <span>Monthly sales are performing well.</span>
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <div class="quick-wrapper">
-    <button class="icon-button" id="quickButton">
-        ♧
-    </button>
 
-    <div class="quick-menu" id="quickMenu">
-        <div class="quick-title">Quick Actions</div>
+                        <button
+                            id="quickButton"
+                            class="icon-button">
+                            ♧
+                        </button>
 
-        <button class="quick-item" id="quickOrders">
-            View Orders
-        </button>
+                        <div
+                            id="quickMenu"
+                            class="quick-menu">
 
-        <button class="quick-item" id="quickNotifications">
-            Notifications
-        </button>
+                            <div class="quick-title">
+                                Quick Actions
+                            </div>
 
-        <button class="quick-item" id="quickSettings">
-            Settings
-        </button>
-    </div>
-</div>
+                            <button
+                                id="quickOrders"
+                                class="quick-item">
+                                View Orders
+                            </button>
 
-                    <div class="profile" id="profileButton">
-    <div class="profile-avatar">RF</div>
-    <span>Romesa Farooq</span>
-    <span>⌄</span>
+                            <button
+                                id="quickNotifications"
+                                class="quick-item">
+                                Notifications
+                            </button>
 
-    <div class="profile-menu" id="profileMenu">
-        <a href="#">Profile</a>
-        <a href="#">Settings</a>
-        <a href="#">Logout</a>
-    </div>
-</div>
+                            <button
+                                id="quickSettings"
+                                class="quick-item">
+                                Settings
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="profile"
+                        id="profileButton">
+
+                        <div class="profile-avatar">
+                            RF
+                        </div>
+
+                        <span>
+                            Romesa Farooq
+                        </span>
+
+                        <span>
+                            ⌄
+                        </span>
+
+                        <div
+                            id="profileMenu"
+                            class="profile-menu">
+
+                            <a href="#">
+                                Profile
+                            </a>
+
+                            <a href="#">
+                                Account
+                            </a>
+
+                            <a href="#">
+                                Settings
+                            </a>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </nav>
 
-
             <section class="welcome-section">
 
                 <div>
 
-                    <h2>
-                        Good afternoon, Romesa
+                    <h2 id="greeting">
+                        Good evening, Romesa
                     </h2>
 
                     <p>
@@ -146,7 +193,6 @@
                 </div>
 
             </section>
-
 
             <div class="row g-4 stats-row">
 
@@ -158,7 +204,9 @@
                             Total Sales
                         </p>
 
-                        <h3 id="totalSales" class="stat-value">
+                        <h3
+                            id="totalSales"
+                            class="stat-value">
                             $0
                         </h3>
 
@@ -170,7 +218,6 @@
 
                 </div>
 
-
                 <div class="col-lg-3 col-md-6">
 
                     <div class="stat-card">
@@ -179,7 +226,9 @@
                             Total Orders
                         </p>
 
-                        <h3 id="totalOrders" class="stat-value">
+                        <h3
+                            id="totalOrders"
+                            class="stat-value">
                             0
                         </h3>
 
@@ -191,7 +240,6 @@
 
                 </div>
 
-
                 <div class="col-lg-3 col-md-6">
 
                     <div class="stat-card">
@@ -200,7 +248,9 @@
                             Customers
                         </p>
 
-                        <h3 id="customers" class="stat-value">
+                        <h3
+                            id="customers"
+                            class="stat-value">
                             0
                         </h3>
 
@@ -212,7 +262,6 @@
 
                 </div>
 
-
                 <div class="col-lg-3 col-md-6">
 
                     <div class="stat-card">
@@ -221,7 +270,9 @@
                             Pending Orders
                         </p>
 
-                        <h3 id="pendingOrders" class="stat-value">
+                        <h3
+                            id="pendingOrders"
+                            class="stat-value">
                             0
                         </h3>
 
@@ -234,7 +285,6 @@
                 </div>
 
             </div>
-
 
             <div class="row g-4 chart-row">
 
@@ -258,7 +308,6 @@
 
                         </div>
 
-
                         <div class="chart-container">
 
                             <canvas id="salesChart"></canvas>
@@ -268,7 +317,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="col-lg-4">
 
@@ -290,7 +338,6 @@
 
                         </div>
 
-
                         <div class="chart-container">
 
                             <canvas id="categoryChart"></canvas>
@@ -302,7 +349,6 @@
                 </div>
 
             </div>
-
 
             <div class="row">
 
@@ -324,79 +370,94 @@
 
                             </div>
 
-
-                            <button id="viewAllOrders" class="view-button">
+                            <button
+                                id="viewAllOrders"
+                                class="view-button">
                                 View All
                             </button>
 
                         </div>
 
+                        <div class="order-search">
 
-<div class="order-filters">
-    <button class="filter-button active" data-status="All">
-        All
-    </button>
+                            <input
+                                type="text"
+                                id="orderSearch"
+                                placeholder="Search orders...">
 
-    <button class="filter-button" data-status="Completed">
-        Completed
-    </button>
+                        </div>
 
-    <button class="filter-button" data-status="Pending">
-        Pending
-    </button>
+                        <div class="order-filters">
 
-    <button class="filter-button" data-status="Processing">
-        Processing
-    </button>
-</div>
-<div class="order-search">
-    <input
-        type="text"
-        id="orderSearch"
-        class="form-control"
-        placeholder="Search orders..."
-    >
-</div>
+                            <button
+                                class="filter-button active"
+                                data-status="All">
+                                All
+                            </button>
 
- <div class="table-responsive">
+                            <button
+                                class="filter-button"
+                                data-status="Completed">
+                                Completed
+                            </button>
 
-                <table class="table orders-table">
+                            <button
+                                class="filter-button"
+                                data-status="Pending">
+                                Pending
+                            </button>
 
-                    <thead>
+                            <button
+                                class="filter-button"
+                                data-status="Processing">
+                                Processing
+                            </button>
 
-                        <tr>
+                        </div>
 
-                            <th>
-                                Customer
-                            </th>
+                        <div class="table-responsive">
 
-                            <th>
-                                Product
-                            </th>
+                            <table class="table orders-table">
 
-                            <th>
-                                Amount
-                            </th>
+                                <thead>
 
-                            <th>
-                                Status
-                            </th>
+                                    <tr>
 
-                            <th>
-                                Date
-                            </th>
+                                        <th>
+                                            Customer
+                                        </th>
 
-                        </tr>
+                                        <th>
+                                            Product
+                                        </th>
 
-                    </thead>
+                                        <th>
+                                            Amount
+                                        </th>
 
+                                        <th>
+                                            Status
+                                        </th>
 
-                    <tbody id="ordersTableBody">
-                    </tbody>
+                                        <th>
+                                            Date
+                                        </th>
 
-                </table>
+                                    </tr>
 
-            </div>
+                                </thead>
+
+                                <tbody id="ordersTableBody">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -404,7 +465,6 @@
     </main>
 
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -415,5 +475,4 @@
 <script src="js/script.js"></script>
 
 </body>
-
 </html>

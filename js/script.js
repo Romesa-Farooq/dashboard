@@ -12,7 +12,40 @@ const dashboardData = {
     categorySales: {
         labels: ["Electronics", "Clothing", "Home", "Sports"],
         values: [8200, 6400, 5100, 3900]
+    },
+
+    recentOrders: [
+    {
+        customer: "Sarah Khan",
+        product: "Wireless Mouse",
+        amount: 120,
+        status: "Completed",
+        date: "Sep 13, 2026"
+    },
+    {
+        customer: "Ahmed Ali",
+        product: "Mechanical Keyboard",
+        amount: 85,
+        status: "Pending",
+        date: "Sep 12, 2026"
+    },
+    {
+        customer: "Hina Malik",
+        product: "USB-C Hub",
+        amount: 64,
+        status: "Completed",
+        date: "Sep 11, 2026"
+    },
+    {
+        customer: "Usman Raza",
+        product: "Laptop Stand",
+        amount: 48,
+        status: "Processing",
+        date: "Sep 10, 2026"
     }
+]
+
+
 };
 
 $(document).ready(function () {
@@ -104,5 +137,23 @@ $(document).ready(function () {
             }
         }
     });
+
+    const ordersTableBody = $("#ordersTableBody");
+
+dashboardData.recentOrders.forEach(function (order) {
+
+    const row = `
+        <tr>
+            <td>${order.customer}</td>
+            <td>${order.product}</td>
+            <td>$${order.amount.toLocaleString()}</td>
+            <td>${order.status}</td>
+            <td>${order.date}</td>
+        </tr>
+    `;
+
+    ordersTableBody.append(row);
+
+});
 
 });

@@ -171,19 +171,18 @@ $(document).ready(function () {
 
                 },
 
-                y: {
-
-                    beginAtZero: true,
-
-                    grid: {
-                        color: "#eeeeee"
-                    },
-
-                    ticks: {
-                        color: "#7a828a"
-                    }
-
-                }
+               y: {
+    beginAtZero: true,
+    grid: {
+        color: "#eeeeee"
+    },
+    ticks: {
+        color: "#7a828a",
+        callback: function (value) {
+            return "$" + value.toLocaleString();
+        }
+    }
+}
 
             }
 
@@ -247,18 +246,17 @@ $(document).ready(function () {
                 },
 
                 y: {
-
-                    beginAtZero: true,
-
-                    grid: {
-                        color: "#eeeeee"
-                    },
-
-                    ticks: {
-                        color: "#7a828a"
-                    }
-
-                }
+    beginAtZero: true,
+    grid: {
+        color: "#eeeeee"
+    },
+    ticks: {
+        color: "#7a828a",
+        callback: function (value) {
+            return "$" + value.toLocaleString();
+        }
+    }
+}
 
             }
 
@@ -266,63 +264,149 @@ $(document).ready(function () {
 
     });
 
-
+    
     let showingAllOrders = false;
+    let selectedStatus = "All";
+    let searchText = "";
 
+function renderOrders() {
+    const ordersTableBody = $("#ordersTableBody");
+    ordersTableBody.empty();
 
-    function renderOrders() {
+    const search = searchText.trim().toLowerCase();
 
-        const ordersTableBody = $("#ordersTableBody");
+    const filteredOrders = dashboardData.recentOrders.filter(function (order) {
+        const matchesStatus =
+            selectedStatus === "All" ||
+            order.status === selectedStatus;
 
-        ordersTableBody.empty();
+        const matchesSearch =
+    search === "" ||
+    order.customer.toLowerCase().includes(search) ||
+    order.product.toLowerCase().includes(search) ||
+    order.status.toLowerCase().includes(search) ||
+    order.amount.toString().includes(search);
 
+        return matchesStatus && matchesSearch;
+    });
 
-        const ordersToDisplay = showingAllOrders
-            ? dashboardData.recentOrders
-            : dashboardData.recentOrders.slice(0, 4);
+    const ordersToDisplay = showingAllOrders
+        ? filteredOrders
+        : filteredOrders.slice(0, 4);
+    
+    const viewAllButton = $("#viewAllOrders");
 
+if (filteredOrders.length <= 4) {
+    viewAllButton.hide();
+    showingAllOrders = false;
+} else {
+    viewAllButton.show();
+    viewAllButton.text(showingAllOrders ? "Show Less" : "View All");
+}
 
-        ordersToDisplay.forEach(function (order) {
+    if (ordersToDisplay.length === 0) {
+    ordersTableBody.html(`
+        <tr>
+            <td colspan="5" class="no-results">
+                No results found
+            </td>
+        </tr>
+    `);
+} else {
+    ordersToDisplay.forEach(function (order) {
+        const row = `
+            <tr>
+                <td>${order.customer}</td>
+                <td>${order.product}</td>
+                <td>$${order.amount.toLocaleString()}</td>
+                <td>
+                    <span class="status-badge ${order.status.toLowerCase()}">
+                        ${order.status}
+                    </span>
+                </td>
+                <td>${order.date}</td>
+            </tr>
+        `;
 
-            const row = `
-                <tr>
-                    <td>${order.customer}</td>
+        ordersTableBody.append(row);
+    });
+}
 
-                    <td>${order.product}</td>
-
-                    <td>$${order.amount.toLocaleString()}</td>
-
-                    <td>
-                        <span class="status-badge ${order.status.toLowerCase()}">
-                            ${order.status}
-                        </span>
-                    </td>
-
-                    <td>${order.date}</td>
-                </tr>
-            `;
-
-            ordersTableBody.append(row);
-
-        });
-
-
-        $("#viewAllOrders").text(
-            showingAllOrders ? "Show Less" : "View All"
-        );
-
-    }
-
-
-    renderOrders();
-
+    $("#viewAllOrders").text(
+        showingAllOrders ? "Show Less" : "View All"
+    );
+}
 
     $("#viewAllOrders").click(function () {
-
         showingAllOrders = !showingAllOrders;
-
         renderOrders();
-
     });
+
+    $(".filter-button").click(function () {
+    selectedStatus = $(this).data("status");
+    showingAllOrders = false;
+    $(".filter-button").removeClass("active");
+    $(this).addClass("active");
+    renderOrders();
+});
+
+    $("#orderSearch").on("input", function () {
+    searchText = $(this).val();
+    showingAllOrders = false;
+    renderOrders();
+});
+
+$(".sidebar-nav .nav-link").click(function (event) {
+    event.preventDefault();
+
+    $(".sidebar-nav .nav-link").removeClass("active");
+    $(this).addClass("active");
+});
+
+$("#profileButton").click(function (event) {
+    event.stopPropagation();
+    $("#profileMenu").toggle();
+});
+
+$(document).click(function () {
+    $("#profileMenu").hide();
+});
+
+$("#notificationButton").click(function (event) {
+    event.stopPropagation();
+
+    $("#notificationMenu").toggle();
+    $("#profileMenu").hide();
+});
+
+$(document).click(function () {
+    $("#notificationMenu").hide();
+});
+
+$("#quickButton").click(function (event) {
+    event.stopPropagation();
+    $("#quickMenu").toggle();
+    $("#notificationMenu").hide();
+    $("#profileMenu").hide();
+});
+
+$("#quickOrders").click(function () {
+    $("#quickMenu").hide();
+    $("#viewAllOrders").click();
+});
+
+$("#quickNotifications").click(function () {
+    $("#quickMenu").hide();
+    $("#notificationButton").click();
+});
+
+$("#quickSettings").click(function () {
+    $("#quickMenu").hide();
+    alert("Settings selected");
+});
+
+$(document).click(function () {
+    $("#quickMenu").hide();
+});
 
 });

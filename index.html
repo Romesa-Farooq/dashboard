@@ -72,29 +72,59 @@
 
                 <div class="topbar-actions">
 
-                    <button class="icon-button">
-                        ✉
-                    </button>
+                    <div class="notification-wrapper">
+    <button class="icon-button" id="notificationButton">
+        ✉
+    </button>
 
-                    <button class="icon-button">
-                        ♧
-                    </button>
+    <div class="notification-menu" id="notificationMenu">
+        <div class="notification-title">Notifications</div>
 
-                    <div class="profile">
+        <div class="notification-item">
+            <strong>New order received</strong>
+            <span>Sarah Khan placed an order</span>
+        </div>
 
-                        <div class="profile-avatar">
-                            RF
-                        </div>
+        <div class="notification-item">
+            <strong>Pending order</strong>
+            <span>2 orders need attention</span>
+        </div>
+    </div>
+</div>
 
-                        <span>
-                            Romesa Farooq
-                        </span>
+                    <div class="quick-wrapper">
+    <button class="icon-button" id="quickButton">
+        ♧
+    </button>
 
-                        <span>
-                            ⌄
-                        </span>
+    <div class="quick-menu" id="quickMenu">
+        <div class="quick-title">Quick Actions</div>
 
-                    </div>
+        <button class="quick-item" id="quickOrders">
+            View Orders
+        </button>
+
+        <button class="quick-item" id="quickNotifications">
+            Notifications
+        </button>
+
+        <button class="quick-item" id="quickSettings">
+            Settings
+        </button>
+    </div>
+</div>
+
+                    <div class="profile" id="profileButton">
+    <div class="profile-avatar">RF</div>
+    <span>Romesa Farooq</span>
+    <span>⌄</span>
+
+    <div class="profile-menu" id="profileMenu">
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+    </div>
+</div>
 
                 </div>
 
@@ -302,51 +332,71 @@
                         </div>
 
 
-                        <div class="table-responsive">
+<div class="order-filters">
+    <button class="filter-button active" data-status="All">
+        All
+    </button>
 
-                            <table class="table orders-table">
+    <button class="filter-button" data-status="Completed">
+        Completed
+    </button>
 
-                                <thead>
+    <button class="filter-button" data-status="Pending">
+        Pending
+    </button>
 
-                                    <tr>
+    <button class="filter-button" data-status="Processing">
+        Processing
+    </button>
+</div>
+<div class="order-search">
+    <input
+        type="text"
+        id="orderSearch"
+        class="form-control"
+        placeholder="Search orders..."
+    >
+</div>
 
-                                        <th>
-                                            Customer
-                                        </th>
+ <div class="table-responsive">
 
-                                        <th>
-                                            Product
-                                        </th>
+                <table class="table orders-table">
 
-                                        <th>
-                                            Amount
-                                        </th>
+                    <thead>
 
-                                        <th>
-                                            Status
-                                        </th>
+                        <tr>
 
-                                        <th>
-                                            Date
-                                        </th>
+                            <th>
+                                Customer
+                            </th>
 
-                                    </tr>
+                            <th>
+                                Product
+                            </th>
 
-                                </thead>
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
 
 
-                                <tbody id="ordersTableBody">
+                    <tbody id="ordersTableBody">
+                    </tbody>
 
-                                </tbody>
+                </table>
 
-                            </table>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
+            </div>
             </div>
 
         </div>
